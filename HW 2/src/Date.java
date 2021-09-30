@@ -34,13 +34,21 @@ class Date {
      *          not a valid date, the program halts with an error message.
      */
     public Date(String s) {
-	String[] dateStrings = s.split("/");
-	month = Integer.parseInt(dateStrings[0]);
-	day = Integer.parseInt(dateStrings[1]);
-	year = Integer.parseInt(dateStrings[2]);
+
+	// Try to parse string s into a date. Otherwise, it is invalid.
+	try {
+	    String[] dateStrings = s.split("/");
+	    month = Integer.parseInt(dateStrings[0]);
+	    day = Integer.parseInt(dateStrings[1]);
+	    year = Integer.parseInt(dateStrings[2]);
+
+	} catch (Exception e) {
+	    System.out.println("The date \"" + s + "\" is not a valid date.");
+	    System.exit(0);
+	}
 
 	if (!isValidDate(month, day, year)) {
-	    System.out.println("The date " + this.toString() + " is not a valid date.");
+	    System.out.println("The date \"" + s + "\" is not a valid date.");
 	    System.exit(0);
 	}
     }
@@ -51,6 +59,7 @@ class Date {
      * @return true if and only if the input year is a leap year.
      */
     public static boolean isLeapYear(int year) {
+
 	boolean result = false;
 	if (year % 400 == 0) {
 	    result = true;
@@ -130,7 +139,7 @@ class Date {
      * @return a String representation of this date.
      */
     public String toString() {
-	return "" + month + "/" + day + "/" + year; // replace this line with your solution
+	return "" + month + "/" + day + "/" + year;
     }
 
     /**
@@ -139,6 +148,7 @@ class Date {
      * @return true if and only if this Date is before d.
      */
     public boolean isBefore(Date d) {
+
 	if (year < d.year) {
 	    return true;
 	} else if (month < d.month && year == d.year) {
@@ -155,14 +165,8 @@ class Date {
      * @return true if and only if this Date is after d.
      */
     public boolean isAfter(Date d) {
-	if (year > d.year) {
-	    return true;
-	} else if (month > d.month && year == d.year) {
-	    return true;
-	} else if (day > d.day && month == d.month) {
-	    return true;
-	}
-	return false;
+
+	return (!(isBefore(d) || isSameDate(d)));
     }
 
     /**
@@ -198,11 +202,43 @@ class Date {
 	    return dayInYear() - d.dayInYear();
 	}
 
-	return -1; // replace this line with your solution
+	Date earlier;
+	Date later;
+	int multiplier = 1;
+
+	if (isBefore(d)) {
+	    earlier = this;
+	    later = d;
+	    multiplier = -1;
+	} else {
+	    earlier = d;
+	    later = this;
+	}
+
+	int diff = 0;
+	diff += later.dayInYear();
+	for (int y = later.year - 1; y > earlier.year; y--) {
+	    Date x = new Date(12, 31, y);
+	    diff += x.dayInYear();
+	}
+
+	Date x = new Date(12, 31, earlier.year);
+	diff += (x.dayInYear() - earlier.dayInYear());
+	return diff * multiplier;
+
+    }
+
+    /**
+     * Determines whether this Date is the same as the Date d.
+     * 
+     * @return true if and only if this Date is the same as d.
+     */
+    private boolean isSameDate(Date d) {
+	return (month == d.month && day == d.day && year == d.year);
     }
 
     public static void main(String[] argv) {
-	System.out.println("\nTesting constructors.");
+	System.out.println("\nTesting constructors and toString.");
 	Date d1 = new Date(1, 1, 1);
 	System.out.println("Date should be 1/1/1: " + d1);
 	d1 = new Date("2/4/2");
@@ -222,7 +258,29 @@ class Date {
 	Date d4 = new Date("2/27/1977");
 	Date d5 = new Date("8/31/2110");
 
+	Date d6 = new Date(7, 7, 1800);
+	// Date d7 = new Date(2, 29, 1900); // Should be invalid.
+	Date d8 = new Date(2, 29, 1600);
+	Date d9 = new Date(11, 29, 2000);
+	// Date d10 = new Date(4, 40, 1900); // Should be invalid.
+	Date d11 = new Date(4, 10, 1900);
+
+	// These dates should all be invalid and cause the program to halt.
+	// Date d12 = new Date("11/31/2009");
+	// Date d13 = new Date("12/4");
+	// Date d14 = new Date("hey dude");
+	// Date d15 = new Date(" 011/4/2010 AD");
+
 	/* I recommend you write code to test the isLeapYear function! */
+
+	System.out.println("\nTesting isLeapYear.");
+	System.out.println(d1 + " should be false: " + Date.isLeapYear(d1.year));
+	System.out.println(d2 + " should be true: " + Date.isLeapYear(d2.year));
+	System.out.println(d5 + " should be false: " + Date.isLeapYear(d5.year));
+	System.out.println(d6 + " should be false: " + Date.isLeapYear(d6.year));
+	System.out.println(d8 + " should be true: " + Date.isLeapYear(d8.year));
+	System.out.println(d9 + " should be true: " + Date.isLeapYear(d9.year));
+	System.out.println(d11 + " should be false: " + Date.isLeapYear(d11.year));
 
 	System.out.println("\nTesting before and after.");
 	System.out.println(d2 + " after " + d1 + " should be true: " + d2.isAfter(d1));
