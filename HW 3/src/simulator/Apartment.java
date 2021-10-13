@@ -6,7 +6,7 @@ public class Apartment {
     private int IDNum;
     private int yearsLeft;
 
-    // Constructor for Apartment
+    // Constructor for Apartment, to be completed by you
     public Apartment(double qual, int ID, int years) {
 	this.quality = qual;
 	this.IDNum = ID;
