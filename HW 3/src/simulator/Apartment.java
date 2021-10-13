@@ -1,31 +1,35 @@
 package simulator;
 
 public class Apartment {
-    //Instance variables for Apartment
+    // Instance variables for Apartment
     private double quality;
     private int IDNum;
     private int yearsLeft;
 
-    //Constructor for Apartment, to be completed by you
-    public Apartment (double qual, int ID, int years) {    }
-
-    //Returns quality of apartment
-    public double getQuality () {
-        return this.quality;
+    // Constructor for Apartment
+    public Apartment(double qual, int ID, int years) {
+	this.quality = qual;
+	this.IDNum = ID;
+	this.yearsLeft = years;
     }
 
-    //Returns ID number of apartment
-    public int getIDNum () {
-        return this.IDNum;
+    // Returns quality of apartment
+    public double getQuality() {
+	return this.quality;
     }
 
-    //Returns years left until apartment is vacant
-    public int getYearsLeft () {
-        return this.yearsLeft;
+    // Returns ID number of apartment
+    public int getIDNum() {
+	return this.IDNum;
     }
 
-    //Sets number of years until apartment is vacant
-    public void setYearsLeft (int years) {
-        this.yearsLeft = years;
+    // Returns years left until apartment is vacant
+    public int getYearsLeft() {
+	return this.yearsLeft;
+    }
+
+    // Sets number of years until apartment is vacant
+    public void setYearsLeft(int years) {
+	this.yearsLeft = years;
     }
 }
