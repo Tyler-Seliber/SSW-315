@@ -32,4 +32,5 @@ public class Apartment {
     public void setYearsLeft(int years) {
 	this.yearsLeft = years;
     }
+
 }

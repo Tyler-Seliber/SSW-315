@@ -90,4 +90,9 @@ public class MyQueue<E> {
     public int size() {
 	return size;
     }
+
+    // Returns the data from the final node of the queue
+    public E getRear() {
+	return rear.data;
+    }
 }
