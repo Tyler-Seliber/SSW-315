@@ -47,4 +47,13 @@ class TestLinkedTree {
 
     }
 
+    @Test
+    void testSumAlongPath() {
+	LinkedTree tree = new LinkedTree();
+	int[] keys = { 8, 4, 15, 2, 5, 30 };
+	tree.insertKeys(keys);
+	assertEquals(17, tree.sumAlongPath(5));
+	assertEquals(23, tree.sumAlongPath(12));
+    }
+
 }

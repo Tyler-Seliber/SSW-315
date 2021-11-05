@@ -342,7 +342,26 @@ public class LinkedTree {
      */
     public int sumAlongPath(int key) {
 	/*** LAB 10: IMPLEMENT THIS METHOD ***/
-	return 0;
+	int sum = 0;
+	boolean reachedEnd = false;
+	Node current = root;
+	while (!reachedEnd) {
+	    sum += current.key;
+	    if (key < current.key) {
+		if (current.left != null)
+		    current = current.left;
+		else
+		    reachedEnd = true;
+	    } else if (key > current.key) {
+		if (current.right != null)
+		    current = current.right;
+		else
+		    reachedEnd = true;
+	    } else {
+		reachedEnd = true;
+	    }
+	}
+	return sum;
     }
 
     public static void main(String[] args) {
