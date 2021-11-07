@@ -21,6 +21,7 @@
 		<item key="WizardFileSystemResourceImportPage1.STORE_PATH_VARIABLE_SELECTED_ID" value="true"/>
 		<item key="WizardFileSystemResourceImportPage1.STORE_PATH_VARIABLE_NAME_ID" value="PROJECT_LOC"/>
 		<list key="WizardFileSystemResourceImportPage1.STORE_SOURCE_NAMES_ID">
+			<item value="/Users/tyler/GitHub Repositories/SSW-315/Lab 9/src"/>
 			<item value="/Users/tyler/Downloads/Lab 8/src/weiss/nonstandard"/>
 			<item value="/Users/tyler/Downloads"/>
 			<item value="/Users/tyler/Downloads/simulator"/>
@@ -30,6 +31,7 @@
 	<section name="ZipFileImportWizard">
 		<item key="WizardZipFileResourceImportPage1.STORE_OVERWRITE_EXISTING_RESOURCES_ID" value="false"/>
 		<list key="WizardZipFileResourceImportPage1.STORE_SOURCE_NAMES_ID">
+			<item value="/Users/tyler/Downloads/lab9.zip"/>
 			<item value="/Users/tyler/Downloads/Lab 4.zip"/>
 		</list>
 	</section>
