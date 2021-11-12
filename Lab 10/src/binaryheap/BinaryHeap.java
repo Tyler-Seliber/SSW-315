@@ -110,10 +110,6 @@ public class BinaryHeap<E> extends ArrayList<E> implements Queue<E> {
 
 		// Update parent index in order to move one level up
 		parent = parent / 2;
-
-//		// Check if it reaches the root node, if yes then break out the loop
-//		if (parent == 0)
-//		    break;
 	    }
 
 	    //
@@ -144,10 +140,10 @@ public class BinaryHeap<E> extends ArrayList<E> implements Queue<E> {
 	    return super.remove(this.size());
 
 	// Get minimum element in the list, at index of 1, to be removed;
-	E minElement = _________________;
+	E minElement = this.get(1);
 
 	// Remove the last element in the list, which is used to fill the hole at root;
-	E lastElement = super.remove(_________________);
+	E lastElement = super.remove(this.size());
 
 	// Copy last element to the root (i.e. the hole)
 	this.set(1, lastElement);
@@ -168,6 +164,17 @@ public class BinaryHeap<E> extends ArrayList<E> implements Queue<E> {
 	// To compare the values of children, use the following syntax:
 	// comp.compare(this.get(child+1), this.get(child))<0
 	// which means that the right child is smaller
+
+	// Iteratively bubble down the hole
+	for (; hole * 2 < this.size(); hole = child) {
+	    child = hole * 2;
+	    if (comp.compare(this.get(child + 1), this.get(child)) < 0) {
+		set(hole, this.get(child + 1));
+		child++;
+	    } else
+		set(hole, this.get(child));
+
+	}
 
 	// After the for loop above, you find the right position, i.e. the hole index
 	// where you should save the element.
