@@ -94,10 +94,10 @@ public class BinaryHeap<E> extends ArrayList<E> implements Queue<E> {
 	    return true; // Only contains 1 root node, no need to compare
 	else {
 	    // create a hole at the end of the list; what is the index for the end of list??
-	    int hole = _______________;
+	    int hole = this.size();
 
 	    // Get parent index; what is the parent idex?
-	    int parent = _______________;
+	    int parent = hole / 2;
 
 	    // Get the list comparator to compare two objects. We will cover this later.
 	    Comparator<E> comp = this.getComp();
@@ -106,14 +106,14 @@ public class BinaryHeap<E> extends ArrayList<E> implements Queue<E> {
 	    for (; (parent > 0 && comp.compare(element, this.get(parent)) < 0); hole /= 2) {
 		// if the element is less than its parent, you can
 		// copy the parent value to position indexed by the hole;
-		set(hole, _________________);
+		set(hole, this.get(parent));
 
 		// Update parent index in order to move one level up
-		parent = ______________;
+		parent = parent / 2;
 
-		// Check if it reaches the root node, if yes then break out the loop
-		if (parent == 0)
-		    break;
+//		// Check if it reaches the root node, if yes then break out the loop
+//		if (parent == 0)
+//		    break;
 	    }
 
 	    //
