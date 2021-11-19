@@ -203,6 +203,12 @@ public class QuadraticProbingHashTable {
 	return true;
     }
 
+    public HashEntry[] getTable() {
+	HashEntry[] copy = new HashEntry[array.length];
+	System.arraycopy(array, 0, copy, 0, array.length);
+	return copy;
+    }
+
     // Simple main
     public static void main(String[] args) {
 	QuadraticProbingHashTable H = new QuadraticProbingHashTable();
