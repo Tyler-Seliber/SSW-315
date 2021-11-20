@@ -5,6 +5,7 @@
 	<item key="org.eclipse.jdt.ui.last.selected.create.moduleinfo" value="false"/>
 	<item key="org.eclipse.jdt.ui.lastextjar" value="/Users/tyler/Downloads"/>
 	<item key="delegateUpdating" value="false"/>
+	<item key="filters_last_used" value="filter_imports;"/>
 	<list key="workingset_selection_history">
 		<item value="Lab 10"/>
 	</list>
@@ -25,8 +26,8 @@
 		<item key="create_unimplemented" value="true"/>
 	</section>
 	<section name="completion_proposal_size">
-		<item key="size.x" value="1720"/>
-		<item key="size.y" value="1331"/>
+		<item key="size.x" value="398"/>
+		<item key="size.y" value="266"/>
 	</section>
 	<section name="quick_assist_proposal_size">
 	</section>

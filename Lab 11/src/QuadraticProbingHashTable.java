@@ -30,8 +30,8 @@ public class QuadraticProbingHashTable {
      * @param size the approximate initial size.
      */
     public QuadraticProbingHashTable(int size) {
-	allocateArray(size);
-	makeEmpty();
+	allocateArray(size); // Create an array of size
+	makeEmpty(); // Make the array empty
     }
 
     /**
@@ -42,14 +42,17 @@ public class QuadraticProbingHashTable {
     public void insert(Hashable x) {
 	// Insert x as active
 	int currentPos = findPos(x);
-	if (isActive(currentPos))
+	if (isActive(currentPos)) {
 	    return;
+	}
 
+	// Make the new element a HashEntry
 	array[currentPos] = new HashEntry(x, true);
 
 	// Rehash; see Section 5.5
-	if (++currentSize > array.length / 2)
+	if (++currentSize > array.length / 2) {
 	    rehash();
+	}
     }
 
     /**
@@ -63,9 +66,13 @@ public class QuadraticProbingHashTable {
 	currentSize = 0;
 
 	// Copy table over
-	for (int i = 0; i < oldArray.length; i++)
-	    if (oldArray[i] != null && oldArray[i].isActive)
+	int i = 0;
+	while (i < oldArray.length) {
+	    if (oldArray[i] != null && oldArray[i].isActive) {
 		insert(oldArray[i].element);
+	    }
+	    i++;
+	}
 
 	return;
     }
@@ -78,14 +85,16 @@ public class QuadraticProbingHashTable {
      */
     private int findPos(Hashable x) {
 	/* 1 */ int collisionNum = 0;
-	/* 2 */ int currentPos = x.hash(array.length);
+	// Keep track of collision iteration
+	/* 2 */ int currentPos = x.hash(array.length); // Hash the array
 
 	/* 3 */ while (array[currentPos] != null && !array[currentPos].element.equals(x)) {
 	    /* 4 */ currentPos += 2 * ++collisionNum - 1;
 	    // Compute ith probe
-	    /* 5 */ if (currentPos >= array.length)
+	    /* 5 */ if (currentPos >= array.length) {
 		// Implement the mod
 		/* 6 */ currentPos -= array.length;
+	    }
 	}
 
 	/* 7 */ return currentPos;
@@ -97,9 +106,10 @@ public class QuadraticProbingHashTable {
      * @param x the item to remove.
      */
     public void remove(Hashable x) {
-	int currentPos = findPos(x);
-	if (isActive(currentPos))
+	int currentPos = findPos(x); // Find the element to remove
+	if (isActive(currentPos)) { // If element is not already marked as inactive, mark it inactive
 	    array[currentPos].isActive = false;
+	}
     }
 
     /**
@@ -109,8 +119,13 @@ public class QuadraticProbingHashTable {
      * @return the matching item.
      */
     public Hashable find(Hashable x) {
-	int currentPos = findPos(x);
-	return isActive(currentPos) ? array[currentPos].element : null;
+	int currentPos = findPos(x); // Find element
+	// Return the element if it is active, else return null
+	if (isActive(currentPos)) {
+	    return array[currentPos].element;
+	} else {
+	    return null;
+	}
     }
 
     /**
@@ -120,6 +135,7 @@ public class QuadraticProbingHashTable {
      * @return true if currentPos is active.
      */
     private boolean isActive(int currentPos) {
+	// Check if element has a value and is active
 	return array[currentPos] != null && array[currentPos].isActive;
     }
 
@@ -127,9 +143,12 @@ public class QuadraticProbingHashTable {
      * Make the hash table logically empty.
      */
     public void makeEmpty() {
-	currentSize = 0;
-	for (int i = 0; i < array.length; i++)
+	currentSize = 0; // Set the size to 0
+	int i = 0;
+	while (i < array.length) { // Nullify every element
 	    array[i] = null;
+	    i++;
+	}
     }
 
     /**
@@ -142,8 +161,12 @@ public class QuadraticProbingHashTable {
     public static int hash(String key, int tableSize) {
 	int hashVal = 0;
 
-	for (int i = 0; i < key.length(); i++)
+	int i = 0;
+
+	while (i < key.length()) {
 	    hashVal = 37 * hashVal + key.charAt(i);
+	    i++;
+	}
 
 	hashVal %= tableSize;
 	if (hashVal < 0)
@@ -177,8 +200,9 @@ public class QuadraticProbingHashTable {
 	if (n % 2 == 0)
 	    n++;
 
-	for (; !isPrime(n); n += 2)
-	    ;
+	while (!isPrime(n)) {
+	    n += 2;
+	}
 
 	return n;
     }
@@ -196,9 +220,12 @@ public class QuadraticProbingHashTable {
 	if (n == 1 || n % 2 == 0)
 	    return false;
 
-	for (int i = 3; i * i <= n; i += 2)
+	int i = 3;
+	while (i * i <= n) {
 	    if (n % i == 0)
 		return false;
+	    i += 2;
+	}
 
 	return true;
     }
