@@ -22,6 +22,7 @@ public class QuadraticProbingHashTable {
      */
     public QuadraticProbingHashTable() {
 	this(DEFAULT_TABLE_SIZE);
+	numProbes = 0;
     }
 
     /**
@@ -32,6 +33,7 @@ public class QuadraticProbingHashTable {
     public QuadraticProbingHashTable(int size) {
 	allocateArray(size); // Create an array of size
 	makeEmpty(); // Make the array empty
+	numProbes = 0;
     }
 
     /**
@@ -53,6 +55,9 @@ public class QuadraticProbingHashTable {
 	if (++currentSize > array.length / 2) {
 	    rehash();
 	}
+
+	// Add the amount of probes needed to insert this item
+	numProbes += findProbe(x);
     }
 
     /**
@@ -96,8 +101,30 @@ public class QuadraticProbingHashTable {
 		/* 6 */ currentPos -= array.length;
 	    }
 	}
-
 	/* 7 */ return currentPos;
+    }
+
+    /**
+     * Method that performs quadratic probing resolution.
+     * 
+     * @param x the item to search for.
+     * @return the number of probes needed to insert the element
+     */
+    private int findProbe(Hashable x) {
+	/* 1 */ int collisionNum = 0;
+	// Keep track of collision iteration
+	/* 2 */ int currentPos = x.hash(array.length); // Hash the array
+
+	/* 3 */ while (array[currentPos] != null && !array[currentPos].element.equals(x)) {
+	    /* 4 */ currentPos += 2 * ++collisionNum - 1;
+	    // Compute ith probe
+	    /* 5 */ if (currentPos >= array.length) {
+		// Implement the mod
+		/* 6 */ currentPos -= array.length;
+	    }
+	}
+
+	return collisionNum + 1;
     }
 
     /**
@@ -180,6 +207,7 @@ public class QuadraticProbingHashTable {
     /** The array of elements. */
     private HashEntry[] array; // The array of elements
     private int currentSize; // The number of occupied cells
+    private int numProbes; // The number of probes performed after element insertion
 
     /**
      * Internal method to allocate array.
@@ -230,10 +258,16 @@ public class QuadraticProbingHashTable {
 	return true;
     }
 
+    // Return a copy of the array that represents the hash table
     public HashEntry[] getTable() {
-	HashEntry[] copy = new HashEntry[array.length];
-	System.arraycopy(array, 0, copy, 0, array.length);
-	return copy;
+	HashEntry[] copy = new HashEntry[array.length]; // Create new array of same length
+	System.arraycopy(array, 0, copy, 0, array.length); // Copy hash table array into new array
+	return copy; // Return the new array
+    }
+
+    // Return the number of probes needed to insert all elements
+    public int getProbes() {
+	return numProbes;
     }
 
     // Simple main
