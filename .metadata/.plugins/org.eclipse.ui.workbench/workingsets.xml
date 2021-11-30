@@ -6,5 +6,6 @@
 <item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/Lab 10" type="4"/>
 </workingSet>
 <workingSet aggregate="true" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1631289838822_2" label="Window Working Set" name="Aggregate for window 1631289838822"/>
+<workingSet aggregate="true" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1638152947194_4" label="Window Working Set" name="Aggregate for window 1638152947194"/>
 <mruList name="Lab 10"/>
 </workingSetManager>

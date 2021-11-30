@@ -1,12 +1,14 @@
 applyBackground=false
 approved.defs.file.last.changed.time=1624986146000
+codetogether.announce.displayed=true
 configurationInstallLocation=/Applications/Eclipse.app/Contents/Eclipse/
+ct.reengagement.display.after=1649035830598
 ct.upsell.display.after=1631376501758
 eclipse.preferences.version=1
 iconcolormode=primary
 includeThemingInOomph=false
-last.download.attempt.time=1637690714510
-lastConfiguration=1638055098585
+last.download.attempt.time=1638237658486
+lastConfiguration=1638237651113
 newinstall=false
 overridePEFontSize=false
 showWelcomeDialog=false

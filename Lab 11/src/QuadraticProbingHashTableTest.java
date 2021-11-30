@@ -147,6 +147,10 @@ class QuadraticProbingHashTableTest {
 	dictionary_rand = fileReader(dictionary_rand_path);
 	huck_finn = fileReader(huck_finn_path);
 
+	for (String s : huck_finn) {
+	    System.out.println(s);
+	}
+
 	// Hash tables to hash the contents of each text file
 	QuadraticProbingHashTable dictionary_ht = new QuadraticProbingHashTable(DICTIONARY_SIZE * 2);
 	QuadraticProbingHashTable dictionary_rand_ht = new QuadraticProbingHashTable(DICTIONARY_SIZE * 2);
