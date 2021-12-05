@@ -18,92 +18,51 @@ public class QuicksortLab {
 	System.out.println();
     }
 
-    // quicksort using arrays
+    /*
+     * Quick sort implementation using an array
+     */
     private void quicksort(int from, int to) {
+	// Use first element as pivot point
 	int pivot = from;
 	int pivotValue = items[pivot];
 
+	// Print current iteration of array
 	System.out.print("(" + from + "," + to + ") ");
 	for (int index = from; index <= to; index++) {
 	    System.out.print(items[index] + " ");
 	}
 	System.out.println();
 
-//	Vector leftPartition = new Vector();
-//	Vector rightPartition = new Vector();
-	int[] extra = new int[to + 1];
+	// Keep track of values less than (to the left of) the pivot
+	int left = from + 1;
+	for (int i = from; i <= to; i++)
+	    if (i != pivot)
+		// If current item is less than the pivot value, swap it to the left side of the
+		// array
+		if (items[i] < pivotValue)
+		    swap(i, left++);
 
-	for (int i = from; i <= to; i++) {
-	    if (i != pivot) {
-		if (items[i] < pivotValue) {
-		    extra[i] = items[i];
-		} else {
-		    extra[pivot + i] = items[i];
-		}
-	    }
-	}
+	// Put pivot in the middle of the array
+	swap(pivot, left - 1);
+	pivot = left - 1;
 
-	for (int i = from; i <= to; i++) {
-	    if ((i - from) < pivot) {
-		items[i] = extra[i - from];
-	    } else if ((i - from) == pivot) {
-		items[i] = pivotValue;
-	    } else {
-		items[i] = extra[i - from - pivot - 1];
-	    }
-	}
-
-	if (pivot > 0) {
-	    quicksort(from, from + pivot - 1);
-	}
-	if (pivot < extra.length - 1) {
-	    quicksort(pivot + from, pivot + from + extra.length - pivot);
-//	    This might be the block of code where something is wrong
-	}
+	// Quick sort left half (before pivot)
+	if (pivot > from + 1)
+	    quicksort(from, pivot - 1);
+	// Quick sort right half (after pivot)
+	if (pivot < to - 1)
+	    quicksort(pivot + 1, to);
 
     }
-    // quicksort using vectors (inefficient)
-//    private void quicksort(int from, int to) {
-//	int pivot = from;
-//	int pivotValue = items[pivot];
-//
-//	System.out.print("(" + from + "," + to + ") ");
-//	for (int index = from; index <= to; index++) {
-//	    System.out.print(items[index] + " ");
-//	}
-//	System.out.println();
-//
-//	Vector leftPartition = new Vector();
-//	Vector rightPartition = new Vector();
-//
-//	for (int i = from; i <= to; i++) {
-//	    if (i != pivot) {
-//		if (items[i] < pivotValue) {
-//		    leftPartition.addElement(new Integer(items[i]));
-//		} else {
-//		    rightPartition.insertElementAt(new Integer(items[i]), 0);
-//		}
-//	    }
-//	}
-//
-//	for (int i = from; i <= to; i++) {
-//	    if ((i - from) < leftPartition.size()) {
-//		items[i] = ((Integer) leftPartition.elementAt(i - from)).intValue();
-//	    } else if ((i - from) == leftPartition.size()) {
-//		items[i] = pivotValue;
-//	    } else {
-//		items[i] = ((Integer) rightPartition.elementAt(i - from - leftPartition.size() - 1)).intValue();
-//	    }
-//	}
-//
-//	if (leftPartition.size() > 1) {
-//	    quicksort(from, from + leftPartition.size() - 1);
-//	}
-//	if (rightPartition.size() > 1) {
-//	    quicksort(leftPartition.size() + 1 + from, leftPartition.size() + from + rightPartition.size());
-//	}
-//
-//    }
+
+    /*
+     * Helper method to swap two elements in items array
+     */
+    private void swap(int a, int b) {
+	int temp = items[a];
+	items[a] = items[b];
+	items[b] = temp;
+    }
 
     public static void main(String[] args) {
 	int[] arr = { 44, 75, 23, 43, 55, 12, 64, 77, 33 }; // a test input array
